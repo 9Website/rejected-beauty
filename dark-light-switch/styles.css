@@ -1,0 +1,120 @@
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 7.5rem;
+  height: 3.6rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-input {
+  position: absolute;
+  opacity: 0.01;
+  width: 0;
+  height: 0;
+}
+
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #0f172a, #020617);
+  border-radius: 4rem;
+  box-shadow:
+    inset 0 4px 12px rgba(0, 0, 0, 0.9),
+    0 4px 20px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.toggle-indicator {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.2rem;
+  pointer-events: none;
+}
+
+.toggle-text {
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  transition: all 0.4s ease;
+}
+
+.toggle-text.off {
+  color: #64748b;
+  opacity: 1;
+}
+
+.toggle-text.on {
+  color: #fbbf24;
+  opacity: 0.2;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.8);
+}
+
+.toggle-thumb {
+  position: absolute;
+  left: 0.4rem;
+  top: 0.4rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  background: linear-gradient(135deg, #ffffff, #cbd5e1);
+  border-radius: 50%;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 1);
+  transition:
+    transform 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6),
+    background 0.6s ease,
+    box-shadow 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-core {
+  width: 0.9rem;
+  height: 0.9rem;
+  background-color: #94a3b8;
+  border-radius: 50%;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0.6s ease;
+}
+
+.toggle-input:checked ~ .toggle-track {
+  background: linear-gradient(145deg, #311042, #1e0b2e);
+  border-color: rgba(251, 191, 36, 0.4);
+  box-shadow:
+    inset 0 4px 12px rgba(0, 0, 0, 0.9),
+    0 0 35px rgba(251, 191, 36, 0.25);
+}
+
+.toggle-input:checked ~ .toggle-track .toggle-thumb {
+  transform: translateX(3.9rem) rotate(360deg);
+  background: linear-gradient(135deg, #fde047, #f59e0b);
+  box-shadow:
+    0 0 30px rgba(251, 191, 36, 0.9),
+    inset 0 2px 6px rgba(255, 255, 255, 0.8);
+}
+
+.toggle-input:checked ~ .toggle-track .toggle-core {
+  background-color: #ffffff;
+  box-shadow:
+    0 0 12px #ffffff,
+    inset 0 0 4px #ffffff;
+}
+
+.toggle-input:checked ~ .toggle-track .toggle-text.off {
+  opacity: 0.2;
+}
+
+.toggle-input:checked ~ .toggle-track .toggle-text.on {
+  opacity: 1;
+}
+
+.toggle-input:focus-visible ~ .toggle-track {
+  outline: 3px solid rgba(251, 191, 36, 0.6);
+  outline-offset: 3px;
+}
