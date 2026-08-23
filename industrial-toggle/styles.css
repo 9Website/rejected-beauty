@@ -1,0 +1,283 @@
+.industrial-toggle {
+  display: inline-block;
+  cursor: pointer;
+  perspective: 800px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.industrial-toggle input {
+  display: none;
+}
+
+.toggle-panel {
+  width: 150px;
+  height: 240px;
+  background: linear-gradient(145deg, #1f1f26, #0e0e12);
+  border: 3px solid #333342;
+  border-radius: 16px;
+  position: relative;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.8),
+    inset 0 2px 8px rgba(255, 255, 255, 0.08),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.toggle-panel::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.screw {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #777 30%, #1a1a1a 75%);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.9),
+    0 1px 2px rgba(255, 255, 255, 0.05);
+}
+
+.screw::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 1px;
+  width: 8px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 1px;
+}
+
+.screw.top-left {
+  top: 8px;
+  left: 8px;
+  transform: rotate(35deg);
+}
+.screw.top-right {
+  top: 8px;
+  right: 8px;
+  transform: rotate(115deg);
+}
+.screw.bottom-left {
+  bottom: 8px;
+  left: 8px;
+  transform: rotate(20deg);
+}
+.screw.bottom-right {
+  bottom: 8px;
+  right: 8px;
+  transform: rotate(85deg);
+}
+
+.status-screen {
+  width: 90px;
+  height: 22px;
+  background: #050508;
+  border: 1px solid #2a2a36;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.9);
+  margin-top: 2px;
+}
+
+.status-text {
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ff3838;
+  text-shadow: 0 0 6px rgba(255, 56, 56, 0.8);
+  transition:
+    color 0.4s ease,
+    text-shadow 0.4s ease;
+}
+
+.status-text::before {
+  content: "OFF";
+}
+
+.gauge {
+  width: 58px;
+  height: 58px;
+  background: radial-gradient(circle, #181820, #09090c);
+  border: 2px solid #444455;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.9);
+}
+
+.gauge::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+}
+
+.gauge-ticks {
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.4) 0deg 3deg,
+    transparent 3deg 45deg,
+    rgba(255, 255, 255, 0.4) 45deg 48deg,
+    transparent 48deg 90deg,
+    rgba(255, 56, 56, 0.6) 90deg 93deg,
+    transparent 93deg 360deg
+  );
+  mask-image: radial-gradient(circle, transparent 65%, black 75%);
+  -webkit-mask-image: radial-gradient(circle, transparent 65%, black 75%);
+}
+
+.gauge-needle {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background: #ff3838;
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(-48deg);
+  transition:
+    transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.25),
+    background 0.4s ease;
+  box-shadow: 0 0 8px rgba(255, 56, 56, 0.8);
+}
+
+.gauge-needle::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: -2px;
+  width: 6px;
+  height: 6px;
+  background: #aaa;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.lever-track {
+  width: 18px;
+  height: 84px;
+  background: #040405;
+  border-radius: 12px;
+  position: relative;
+  box-shadow:
+    inset 0 5px 10px rgba(0, 0, 0, 0.95),
+    0 1px 2px rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: center;
+}
+
+.lever-slot {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background: #010102;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.9);
+  border-radius: 2px;
+}
+
+.lever-handle {
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 42px;
+  height: 44px;
+  background: linear-gradient(135deg, #f0ca59, #8c6c0e);
+  border-radius: 8px;
+  transform: translateX(-50%);
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.4);
+  cursor: grab;
+  transition:
+    top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.25),
+    background 0.4s ease,
+    box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.lever-handle:active {
+  cursor: grabbing;
+}
+
+.grip-lines {
+  width: 28px;
+  height: 16px;
+  border-top: 2px solid rgba(0, 0, 0, 0.45);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.45);
+}
+
+.warning-light {
+  width: 14px;
+  height: 14px;
+  background: #ff3838;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 12px #ff3838,
+    inset 0 2px 3px rgba(0, 0, 0, 0.6);
+  transition: all 0.4s ease;
+}
+
+.industrial-toggle input:checked ~ .toggle-panel {
+  border-color: #2ed573;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.8),
+    inset 0 0 25px rgba(46, 213, 115, 0.15);
+}
+
+.industrial-toggle input:checked ~ .toggle-panel .status-text {
+  color: #2ed573;
+  text-shadow: 0 0 8px rgba(46, 213, 115, 0.9);
+}
+
+.industrial-toggle input:checked ~ .toggle-panel .status-text::before {
+  content: "ON";
+}
+
+.industrial-toggle input:checked ~ .toggle-panel .lever-handle {
+  top: 34px;
+  background: linear-gradient(135deg, #fff3c4, #e67e22);
+  box-shadow:
+    0 8px 20px rgba(230, 126, 34, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.industrial-toggle input:checked ~ .toggle-panel .gauge-needle {
+  transform: translateX(-50%) rotate(48deg);
+  background: #2ed573;
+  box-shadow: 0 0 10px rgba(46, 213, 115, 0.9);
+}
+
+.industrial-toggle input:checked ~ .toggle-panel .warning-light {
+  background: #2ed573;
+  box-shadow:
+    0 0 18px #2ed573,
+    inset 0 2px 3px rgba(0, 0, 0, 0.6);
+}
