@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejected Beauty 💅</title>
+    <style>
+        body { font-family: sans-serif; background: #1e1e1e; color: #fff; text-align: center; }
+        #gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
+        .project-card { background: #2d2d2d; padding: 15px; border-radius: 8px; width: 300px; }
+        iframe { width: 100%; height: 250px; border: 1px solid #555; background: #fff; }
+        h3 { text-transform: capitalize; }
+        a { color: #4da6ff; text-decoration: none; display: block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>Rejected Beauty 💅</h1>
+    <p>Components Uiverse didn't want. I think they're beautiful.</p>
+    
+    <!-- This is where the auto-generated projects will appear -->
+    <div id="gallery"></div>
+
+    <script>
+        const owner = '9Website';
+        const repo = 'rejected-beauty';
+        const gallery = document.getElementById('gallery');
+
+        async function loadProjects() {
+            try {
+                // Ask GitHub for a list of everything in your repo
+                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents`);
+                const data = await response.json();
+                
+                // Only keep folders (ignore files like .gitignore or README)
+                const projects = data.filter(item => item.type === 'dir' && !item.name.startsWith('.'));
+
+                projects.forEach(project => {
+                    // Create a card for each project folder
+                    const card = document.createElement('div');
+                    card.className = 'project-card';
+                    
+                    // 1. Title
+                    const title = document.createElement('h3');
+                    title.textContent = project.name.replace(/-/g, ' '); // makes "project-one" into "project one"
+                    
+                    // 2. Live Preview (iframe)
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `./${project.name}/index.html`; 
+                    iframe.title = project.name;
+                    
+                    // 3. Link to Code
+                    const link = document.createElement('a');
+                    link.href = project.html_url; // Direct link to the folder on GitHub
+                    link.textContent = '👀 View Source Code on GitHub';
+                    link.target = '_blank';
+                    
+                    card.append(title, iframe, link);
+                    gallery.appendChild(card);
+                });
+            } catch (error) {
+                console.error("Error loading projects:", error);
+            }
+        }
+
+        // Run the script when the page loads
+        loadProjects();
+    </script>
+</body>
+</html>
