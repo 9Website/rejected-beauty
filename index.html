@@ -2,67 +2,191 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rejected Beauty</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejected Beauty 💅</title>
     <style>
-        body { font-family: sans-serif; background: #1e1e1e; color: #fff; text-align: center; }
-        #gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
-        .project-card { background: #2d2d2d; padding: 15px; border-radius: 8px; width: 300px; }
-        iframe { width: 100%; height: 250px; border: 1px solid #555; background: #fff; }
-        h3 { text-transform: capitalize; }
-        a { color: #4da6ff; text-decoration: none; display: block; margin-top: 10px; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #121212; 
+            color: #e0e0e0; 
+            margin: 0; 
+            padding: 20px; 
+            text-align: center; 
+        }
+        header { margin-bottom: 30px; }
+        h1 { font-size: 2.5rem; margin-bottom: 0; color: #ff4081; }
+        p { color: #aaa; }
+        
+        /* Gallery Grid */
+        #gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+            gap: 25px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        
+        /* Project Card Styling */
+        .project-card { 
+            background: #1e1e1e; 
+            border: 1px solid #333;
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card h3 { 
+            margin: 0; 
+            padding: 15px; 
+            background: #2a2a2a; 
+            text-transform: capitalize; 
+            text-align: left;
+            border-bottom: 1px solid #333;
+            color: #fff;
+        }
+        
+        /* The Preview Box */
+        iframe { 
+            width: 100%; 
+            height: 250px; 
+            border: none; 
+            background: #f8f9fa; /* Light background so components pop */
+            flex-grow: 1;
+        }
+        
+        /* Link to GitHub */
+        .view-code { 
+            display: block; 
+            padding: 15px; 
+            text-align: center; 
+            background: #2a2a2a; 
+            color: #4da6ff; 
+            text-decoration: none; 
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .view-code:hover { background: #333; color: #fff; }
+        
+        #loading { color: #888; font-size: 1.2rem; margin-top: 50px;}
     </style>
 </head>
 <body>
 
-    <h1>Rejected Beauty</h1>
-    <p>Components Uiverse didn't want. I think they're beautiful.</p>
+    <header>
+        <h1>Rejected Beauty 💅</h1>
+        <p>Components Uiverse didn't want. I think they're beautiful.</p>
+    </header>
     
-    <!-- This is where the auto-generated projects will appear -->
+    <p id="loading">Loading masterpieces...</p>
     <div id="gallery"></div>
 
     <script>
         const owner = '9Website';
         const repo = 'rejected-beauty';
         const gallery = document.getElementById('gallery');
+        const loadingText = document.getElementById('loading');
 
         async function loadProjects() {
             try {
-                // Ask GitHub for a list of everything in your repo
-                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents`);
-                const data = await response.json();
-                
-                // Only keep folders (ignore files like .gitignore or README)
-                const projects = data.filter(item => item.type === 'dir' && !item.name.startsWith('.'));
+                // 1. Get the ENTIRE repo file tree in ONE API call (Super fast!)
+                const treeResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/main?recursive=1`);
+                const treeData = await treeResponse.json();
 
-                projects.forEach(project => {
-                    // Create a card for each project folder
+                if (!treeData.tree) throw new Error("Failed to load repo tree");
+
+                // 2. Organize the files into projects
+                const projects = {};
+                treeData.tree.forEach(item => {
+                    // Look for files exactly 1 folder deep (e.g., "project-name/file.html")
+                    const parts = item.path.split('/');
+                    if (parts.length === 2 && item.type === 'blob') {
+                        const projectName = parts[0];
+                        const fileName = parts[1];
+
+                        if (!projects[projectName]) {
+                            projects[projectName] = { html: null, css: null };
+                        }
+
+                        // Find the raw URLs for the HTML and CSS files
+                        if (fileName.endsWith('.html')) {
+                            projects[projectName].html = `https://raw.githubusercontent.com/${owner}/${repo}/main/${item.path}`;
+                        } else if (fileName.endsWith('.css')) {
+                            projects[projectName].css = `https://raw.githubusercontent.com/${owner}/${repo}/main/${item.path}`;
+                        }
+                    }
+                });
+
+                // 3. Build the gallery
+                loadingText.style.display = 'none'; // Hide loading text
+
+                for (const [projectName, files] of Object.entries(projects)) {
+                    // Skip if the folder doesn't have both HTML and CSS
+                    if (!files.html || !files.css) continue; 
+
+                    // Fetch the raw text from the files
+                    const [htmlRes, cssRes] = await Promise.all([
+                        fetch(files.html).then(res => res.text()),
+                        fetch(files.css).then(res => res.text())
+                    ]);
+
+                    // Combine them into a temporary mini-document for the iframe
+                    const combinedDoc = `
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <style>${cssRes}</style>
+                            <style>
+                                /* Basic styling to center your Uiverse element inside the preview */
+                                body { 
+                                    display: flex; 
+                                    justify-content: center; 
+                                    align-items: center; 
+                                    min-height: 100vh; 
+                                    margin: 0; 
+                                    background: #ffffff; 
+                                    font-family: sans-serif; 
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            ${htmlRes}
+                        </body>
+                        </html>
+                    `;
+
+                    // Create the UI Card
                     const card = document.createElement('div');
                     card.className = 'project-card';
-                    
-                    // 1. Title
+
                     const title = document.createElement('h3');
-                    title.textContent = project.name.replace(/-/g, ' '); // makes "project-one" into "project one"
-                    
-                    // 2. Live Preview (iframe)
+                    // Format "cool-button" to "Cool Button"
+                    title.textContent = projectName.replace(/-/g, ' '); 
+
                     const iframe = document.createElement('iframe');
-                    iframe.src = `./${project.name}/index.html`; 
-                    iframe.title = project.name;
-                    
-                    // 3. Link to Code
+                    iframe.srcdoc = combinedDoc; // The magic trick!
+                    iframe.title = projectName;
+
                     const link = document.createElement('a');
-                    link.href = project.html_url; // Direct link to the folder on GitHub
-                    link.textContent = '👀 View Source Code on GitHub';
+                    link.className = 'view-code';
+                    link.href = `https://github.com/${owner}/${repo}/tree/main/${projectName}`;
+                    link.textContent = '👀 View Source on GitHub';
                     link.target = '_blank';
-                    
+
                     card.append(title, iframe, link);
                     gallery.appendChild(card);
-                });
+                }
+
+                if (Object.keys(projects).length === 0) {
+                    gallery.innerHTML = "<p>No projects found yet. Add a folder with an .html and .css file!</p>";
+                }
+
             } catch (error) {
                 console.error("Error loading projects:", error);
+                loadingText.textContent = "Oops, couldn't load projects. Check the console!";
             }
         }
 
-        // Run the script when the page loads
         loadProjects();
     </script>
 </body>
