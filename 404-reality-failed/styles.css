@@ -1,0 +1,113 @@
+@import url("s://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@700&display=swap");
+
+.uiverse-container {
+  margin: 0;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.uiverse-container .uiverse-card-404 {
+  background-color: #f3f315;
+  color: #000000;
+  font-family: "Space Mono", monospace;
+  width: 350px;
+  border: 6px solid #000;
+  box-shadow: 8px 8px 0px #000;
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.uiverse-container .top-tag {
+  background: #000;
+  color: #00ff66;
+  font-family: "Archivo Black", sans-serif;
+  font-size: 11px;
+  padding: 4px 8px;
+  text-transform: uppercase;
+  border: 3px solid #000;
+  box-shadow: 3px 3px 0px #ff0055;
+  transform: rotate(-1deg);
+}
+
+.uiverse-container .giant-404 {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 88px;
+  line-height: 0.9;
+  color: #ff0055;
+  text-shadow:
+    4px 4px 0px #000,
+    8px 8px 0px #00ffff;
+  transform: rotate(2deg);
+  letter-spacing: -3px;
+  margin: 2px 0;
+}
+
+.uiverse-container .speech-bubble {
+  background: #fff;
+  border: 4px solid #000;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 5px 5px 0px #000;
+  transform: rotate(-1deg);
+  text-align: center;
+}
+
+.uiverse-container .bubble-title {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 12px;
+  margin: 0 0 4px 0;
+  color: #000;
+  line-height: 1.2;
+}
+
+.uiverse-container .speech-bubble p {
+  font-size: 11px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.uiverse-container .action-grid {
+  display: flex;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.uiverse-container .mini-btn {
+  width: 100%;
+  font-family: "Archivo Black", sans-serif;
+  font-size: 13px;
+  padding: 10px 8px;
+  text-decoration: none;
+  border: 4px solid #000;
+  text-transform: uppercase;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.05s ease;
+  display: inline-block;
+}
+
+.uiverse-container .mini-btn.primary {
+  background-color: #00ffff;
+  color: #000;
+}
+
+.uiverse-container .mini-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0px #000;
+}
+
+.uiverse-container .mini-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000;
+}
