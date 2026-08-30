@@ -1,0 +1,208 @@
+@import url("s://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Quicksand:wght@600;700&display=swap");
+
+.ufo-404-container {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.ufo-card {
+  background: linear-gradient(180deg, #18122b 0%, #0d0914 100%);
+  color: #e2e8f0;
+  font-family: "Quicksand", sans-serif;
+  width: 340px;
+  border-radius: 24px;
+  border: 2px solid rgba(168, 85, 247, 0.25);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(168, 85, 247, 0.15);
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.beam-area {
+  height: 110px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.ufo-ship {
+  position: relative;
+  width: 70px;
+  height: 26px;
+  z-index: 2;
+  animation: ufo-hover 3s ease-in-out infinite;
+}
+
+@keyframes ufo-hover {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1deg);
+  }
+}
+
+.ufo-dome {
+  position: absolute;
+  top: 0;
+  left: 22px;
+  width: 26px;
+  height: 14px;
+  background-color: #38bdf8;
+  border-radius: 26px 26px 0 0;
+  box-shadow: 0 0 10px #38bdf8;
+}
+
+.ufo-base {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 70px;
+  height: 14px;
+  background: linear-gradient(90deg, #cbd5e1, #f8fafc, #cbd5e1);
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.ufo-lights {
+  position: absolute;
+  bottom: 3px;
+  left: 15px;
+  width: 40px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 3;
+}
+
+.ufo-lights span {
+  width: 4px;
+  height: 4px;
+  background-color: #facc15;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #facc15;
+  animation: blink 1s alternate infinite;
+}
+
+.ufo-lights span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.ufo-lights span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.tractor-beam {
+  position: absolute;
+  top: 20px;
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(
+    180deg,
+    rgba(74, 222, 128, 0.35) 0%,
+    rgba(74, 222, 128, 0) 100%
+  );
+  clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+  animation: beam-pulse 2s ease-in-out infinite;
+}
+
+@keyframes beam-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scaleX(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.05);
+  }
+}
+
+.ufo-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.error-code {
+  font-family: "Fredoka", sans-serif;
+  font-size: 58px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+  color: #c084fc;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
+}
+
+.error-title {
+  font-family: "Fredoka", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #4ade80;
+  margin: 0;
+}
+
+.error-desc {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.ufo-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #a855f7, #9333ea);
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Fredoka", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 14px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+}
+
+.ufo-btn:hover {
+  background: linear-gradient(135deg, #b875f8, #a855f7);
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.6);
+  transform: translateY(-2px);
+}
+
+.ufo-btn:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow: 0 3px 10px rgba(168, 85, 247, 0.4);
+}
