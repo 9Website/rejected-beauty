@@ -1,0 +1,76 @@
+.toggle-input {
+  display: none;
+}
+
+.toggle-label {
+  position: relative;
+  width: 120px;
+  height: 50px;
+  background: #181b22;
+  border: 2px solid #2a2e39;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.6);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toggle-core {
+  position: absolute;
+  left: 6px;
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(255, 65, 108, 0.4);
+  transition:
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.8s ease;
+  z-index: 2;
+}
+
+.toggle-text {
+  position: absolute;
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+
+.toggle-text.off {
+  right: 14px;
+  color: #6b7280;
+  opacity: 1;
+}
+
+.toggle-text.on {
+  left: 18px;
+  color: #10b981;
+  opacity: 0;
+}
+
+.toggle-input:checked + .toggle-label {
+  background: #051b11;
+  border-color: #059669;
+  box-shadow:
+    inset 0 4px 8px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+.toggle-input:checked + .toggle-label .toggle-core {
+  transform: translateX(70px);
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.5);
+}
+
+.toggle-input:checked + .toggle-label .off {
+  opacity: 0;
+}
+
+.toggle-input:checked + .toggle-label .on {
+  opacity: 1;
+}
