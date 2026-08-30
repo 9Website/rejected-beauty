@@ -183,7 +183,7 @@
 
             } catch (error) {
                 console.error("Error loading projects:", error);
-                loadingText.textContent = "Oops, couldn't load projects. Check the console!";
+                loadingText.textContent = "Oops, couldn't load projects. Check the console! (Error most likely from Github fetching API limits reached, wait and try again later).";
             }
         }
 
