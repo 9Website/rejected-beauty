@@ -1,0 +1,115 @@
+@import url("s://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+
+.terminal-404-container {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.terminal-card {
+  background-color: #0d1117;
+  color: #58a6ff;
+  font-family: "Share Tech Mono", monospace;
+  width: 340px;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  box-shadow: 0 16px 32px rgba(1, 4, 9, 0.8);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.terminal-bar {
+  background-color: #161b22;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #30363d;
+}
+
+.circles {
+  display: flex;
+  gap: 6px;
+}
+
+.c {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.c.red {
+  background-color: #ff5f56;
+}
+
+.c.yellow {
+  background-color: #ffbd2e;
+}
+
+.c.green {
+  background-color: #27c93f;
+}
+
+.terminal-title {
+  margin-left: 12px;
+  font-size: 12px;
+  color: #8b949e;
+}
+
+.terminal-content {
+  padding: 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.glitch-title {
+  font-size: 64px;
+  margin: 0;
+  color: #ff7b72;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 123, 114, 0.4);
+}
+
+.terminal-msg {
+  font-size: 13px;
+  color: #c9d1d9;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.terminal-action {
+  display: inline-block;
+  margin-top: 8px;
+  width: 100%;
+  padding: 10px;
+  background-color: #238636;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 6px;
+  transition:
+    background-color 0.2s,
+    transform 0.1s ease;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+}
+
+.terminal-action:hover {
+  background-color: #2ea043;
+}
+
+.terminal-action:active {
+  transform: scale(0.96);
+  background-color: #1f702f;
+}
